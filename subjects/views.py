@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from models.subject import Subject
+from subjects.models import Subject
 
 
 def index(request):

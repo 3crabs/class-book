@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from models.group import Group
+from groups.models import Group
 
 
 def index(request):
