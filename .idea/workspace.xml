@@ -16,8 +16,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -36,7 +36,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/static" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -95,6 +95,7 @@
       <updated>1588955237703</updated>
       <workItem from="1588955272182" duration="8275000" />
       <workItem from="1588964878718" duration="1153000" />
+      <workItem from="1588966059043" duration="1693000" />
     </task>
     <servers />
   </component>
@@ -115,25 +116,25 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="1309" y="418" key="Github.ShareDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1588955357599" />
-    <state width="1877" height="281" key="GridCell.Tab.0.bottom" timestamp="1588966032054">
+    <state width="1877" height="281" key="GridCell.Tab.0.bottom" timestamp="1588967536155">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="281" key="GridCell.Tab.0.bottom/0.0.1920.1040/-2560.0.2560.1040@0.0.1920.1040" timestamp="1588966032054" />
+    <state width="1877" height="281" key="GridCell.Tab.0.bottom/0.0.1920.1040/-2560.0.2560.1040@0.0.1920.1040" timestamp="1588967536155" />
     <state width="916" height="279" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1588963174970" />
-    <state width="1877" height="281" key="GridCell.Tab.0.center" timestamp="1588966032054">
+    <state width="1877" height="281" key="GridCell.Tab.0.center" timestamp="1588967536155">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="281" key="GridCell.Tab.0.center/0.0.1920.1040/-2560.0.2560.1040@0.0.1920.1040" timestamp="1588966032054" />
+    <state width="1877" height="281" key="GridCell.Tab.0.center/0.0.1920.1040/-2560.0.2560.1040@0.0.1920.1040" timestamp="1588967536155" />
     <state width="916" height="279" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1588963174970" />
-    <state width="1877" height="281" key="GridCell.Tab.0.left" timestamp="1588966032054">
+    <state width="1877" height="281" key="GridCell.Tab.0.left" timestamp="1588967536155">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="281" key="GridCell.Tab.0.left/0.0.1920.1040/-2560.0.2560.1040@0.0.1920.1040" timestamp="1588966032054" />
+    <state width="1877" height="281" key="GridCell.Tab.0.left/0.0.1920.1040/-2560.0.2560.1040@0.0.1920.1040" timestamp="1588967536155" />
     <state width="916" height="279" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1588963174970" />
-    <state width="1877" height="281" key="GridCell.Tab.0.right" timestamp="1588966032054">
+    <state width="1877" height="281" key="GridCell.Tab.0.right" timestamp="1588967536155">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="281" key="GridCell.Tab.0.right/0.0.1920.1040/-2560.0.2560.1040@0.0.1920.1040" timestamp="1588966032054" />
+    <state width="1877" height="281" key="GridCell.Tab.0.right/0.0.1920.1040/-2560.0.2560.1040@0.0.1920.1040" timestamp="1588967536155" />
     <state width="916" height="279" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1588963174970" />
     <state x="926" y="165" key="SettingsEditor" timestamp="1588956847481">
       <screen x="0" y="0" width="1920" height="1040" />
