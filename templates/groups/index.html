@@ -1,8 +1,14 @@
 {% extends "main/wrapper.html" %}
 
 {% block content %}
-    <h3>Список групп</h3>
-    {% for group in object_list %}
-        <p>{{ group.id }} - {{ group.name }}</p>
-    {% endfor %}
+
+    <div class="container">
+        <h2 class="mb-5">Список групп</h2>
+        <ul class="list-group w-75">
+            {% for group in object_list %}
+                <li class="list-group-item">{{ group.name }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
 {% endblock %}

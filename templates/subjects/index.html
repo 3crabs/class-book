@@ -1,8 +1,14 @@
 {% extends "main/wrapper.html" %}
 
 {% block content %}
-    <h3>Список предметов</h3>
-    {% for subject in subjects %}
-        <p>{{ subject.name }}</p>
-    {% endfor %}
+
+    <div class="container">
+        <h2 class="mb-5">Список предметов</h2>
+        <ul class="list-group w-75">
+            {% for subject in object_list %}
+                <li class="list-group-item">{{ subject.name }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
 {% endblock %}
