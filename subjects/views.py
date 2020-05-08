@@ -3,4 +3,4 @@ from django.shortcuts import render
 
 
 def index(request):
-    return HttpResponse("<h3>Hello, groups!</h3>")
+    return HttpResponse("<h3>Hello, subjects!</h3>")
