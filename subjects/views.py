@@ -1,5 +1,12 @@
 from django.shortcuts import render
 
+from models.subject import Subject
+
 
 def index(request):
-    return render(request, "subjects/index.html")
+    subjects = [
+        Subject(1, "Математика"),
+        Subject(2, "Физика"),
+        Subject(3, "Химия"),
+    ]
+    return render(request, "subjects/index.html", {'subjects': subjects})

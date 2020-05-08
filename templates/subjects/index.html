@@ -1,5 +1,8 @@
 {% extends "main/wrapper.html" %}
 
 {% block content %}
-    <p>Hello, subjects!</p>
+    <h3>Список предметов</h3>
+    {% for subject in subjects %}
+        <p>{{ subject.name }}</p>
+    {% endfor %}
 {% endblock %}
