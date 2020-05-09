@@ -6,7 +6,7 @@
         <h2 class="mb-5">Список групп</h2>
         <ul class="list-group w-75">
             {% for group in object_list %}
-                <li class="list-group-item">{{ group.name }}</li>
+                <li class="list-group-item"><a href="/groups/{{ group.id }}">{{ group.name }}</a></li>
             {% endfor %}
         </ul>
     </div>

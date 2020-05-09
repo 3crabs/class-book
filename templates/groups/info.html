@@ -1,0 +1,36 @@
+{% extends "main/wrapper.html" %}
+
+{% block content %}
+
+    <div class="container">
+        <h1 class="mb-5">Группа {{ group.name }}</h1>
+        <div class="row">
+            <div class="col-sm">
+                <h3 class="mb-5">Студенты
+                    <button type="button" class="btn btn-light">+</button>
+                </h3>
+                <ul class="list-group">
+                    <li class="list-group-item">Иванов</li>
+                    <li class="list-group-item">Петров</li>
+                    <li class="list-group-item">Сидоров</li>
+                </ul>
+            </div>
+            <div class="col-sm">
+                <h3 class="mb-5">Предметы
+                    <button type="button" class="btn btn-light">+</button>
+                </h3>
+                {% if group.subjects.all %}
+                    <div class="list-group">
+                        {% for subject in group.subjects.all %}
+                            <a href="/subjects/{{ subject.pk }}"
+                               class="list-group-item list-group-item-action">{{ subject.name }}</a>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p>Предметов пока нет</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
