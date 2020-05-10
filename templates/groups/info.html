@@ -9,11 +9,15 @@
                 <h3 class="mb-5">Студенты
                     <button type="button" class="btn btn-light">+</button>
                 </h3>
-                <ul class="list-group">
-                    <li class="list-group-item">Иванов</li>
-                    <li class="list-group-item">Петров</li>
-                    <li class="list-group-item">Сидоров</li>
-                </ul>
+                {% if group.student_set.all %}
+                    <ul class="list-group">
+                        {% for student in group.student_set.all %}
+                            <li class="list-group-item">{{ student.name }}</li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>Студентов пока нет</p>
+                {% endif %}
             </div>
             <div class="col-sm">
                 <h3 class="mb-5">Предметы

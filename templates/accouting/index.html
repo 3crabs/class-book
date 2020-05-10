@@ -1,0 +1,201 @@
+{% extends "main/wrapper.html" %}
+
+{% block content %}
+
+    <div class="container">
+        <h1 class="mb-5">Журнал группы ${groupName}</h1>
+        <div class="container">
+            <h2 class="mb-5">Посещаемость</h2>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Студент</th>
+                    <th scope="col">Лаба 1</th>
+                    <th scope="col">Лаба 2</th>
+                    <th scope="col">Лаба 3</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">Иванов</th>
+                    <td>
+                        <form class="form-inline" action="/addMark" method="post">
+                            <div class="form-group">
+                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                <div class="form-group">
+                        </form>
+                    </td>
+                    <td>
+                        <form class="form-inline" action="/addMark" method="post">
+                            <div class="form-group">
+                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                <div class="form-group">
+                        </form>
+                    </td>
+                    <td>
+                        <form class="form-inline" action="/addMark" method="post">
+                            <div class="form-group">
+                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                <div class="form-group">
+                        </form>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th scope="row">Иванов</th>
+                    <td>
+                        <form class="form-inline" action="/addMark" method="post">
+                            <div class="form-group">
+                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                <div class="form-group">
+                        </form>
+                    </td>
+                    <td>
+                        <form class="form-inline" action="/addMark" method="post">
+                            <div class="form-group">
+                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                <div class="form-group">
+                        </form>
+                    </td>
+                    <td>
+                        <form class="form-inline" action="/addMark" method="post">
+                            <div class="form-group">
+                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                <div class="form-group">
+                        </form>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th scope="row">Иванов</th>
+                    <td>
+                        <form class="form-inline" action="/addMark" method="post">
+                            <div class="form-group">
+                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                <div class="form-group">
+                        </form>
+                    </td>
+                    <td>
+                        <form class="form-inline" action="/addMark" method="post">
+                            <div class="form-group">
+                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                <div class="form-group">
+                        </form>
+                    </td>
+                    <td>
+                        <form class="form-inline" action="/addMark" method="post">
+                            <div class="form-group">
+                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                <div class="form-group">
+                        </form>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+        <div class="container">
+            <h2 class="mb-5">Результаты</h2>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Студент</th>
+                    <th scope="col">Лаба 1</th>
+                    <th scope="col">Лаба 2</th>
+                    <th scope="col">Лаба 3</th>
+                    <th scope="col">Лаба 4</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">Иванов</th>
+                    <td>
+                        <input class="form-control" type="text" placeholder="${ivanov lab1 rating}" readonly
+                               data-toggle="modal" data-target="#exampleModal" data-whatever="Иванов" y>
+                    </td>
+                    <td>
+                        <input class="form-control" type="text" placeholder="${ivanov lab1 rating}" readonly
+                               data-toggle="modal" data-target="#exampleModal" data-whatever="Иванов" y>
+                    </td>
+                    <td>
+                        <input class="form-control" type="text" placeholder="${ivanov lab1 rating}" readonly
+                               data-toggle="modal" data-target="#exampleModal" data-whatever="Иванов" y>
+                    </td>
+                    <td>
+                        <input class="form-control" type="text" placeholder="${ivanov lab1 rating}" readonly
+                               data-toggle="modal" data-target="#exampleModal" data-whatever="Иванов" y>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th scope="row">Петров</th>
+                    <td>
+                        <input class="form-control" type="text" placeholder="${ivanov lab1 rating}" readonly
+                               data-toggle="modal" data-target="#exampleModal" data-whatever="Иванов" y>
+                    </td>
+                    <td>
+                        <input class="form-control" type="text" placeholder="${ivanov lab1 rating}" readonly
+                               data-toggle="modal" data-target="#exampleModal" data-whatever="Иванов" y>
+                    </td>
+                    <td>
+                        <input class="form-control" type="text" placeholder="${ivanov lab1 rating}" readonly
+                               data-toggle="modal" data-target="#exampleModal" data-whatever="Иванов" y>
+                    </td>
+                    <td>
+                        <input class="form-control" type="text" placeholder="${ivanov lab1 rating}" readonly
+                               data-toggle="modal" data-target="#exampleModal" data-whatever="Иванов" y>
+                    </td>
+                </tr>
+
+
+                </tbody>
+            </table>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            ...
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $('#exampleModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget) // Button that triggered the modal
+            var recipient = button.data('whatever') // Extract info from data-* attributes
+            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+            var modal = $(this)
+            modal.find('.modal-title').text('New message to ' + recipient)
+            modal.find('.modal-body input').val(recipient)
+        })
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
+
+{% endblock %}
