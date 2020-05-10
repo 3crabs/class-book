@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from groups.models import Group
+from groups.models import Group, Student
 
 
 def groups(request):
@@ -19,5 +19,17 @@ def group(request, pk):
         object_list = Group.objects.all().order_by("name")
         return render(request, 'groups/index.html', locals())
 
+    group = Group.objects.get(id=pk)
+    return render(request, 'groups/info.html', locals())
+
+
+def group_students(request, pk):
+    if request.POST:
+        item = Student(
+            name=request.POST['name'],
+            email=request.POST['email'],
+            group_id=pk,
+        )
+        item.save()
     group = Group.objects.get(id=pk)
     return render(request, 'groups/info.html', locals())

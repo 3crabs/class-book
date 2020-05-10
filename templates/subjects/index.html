@@ -3,13 +3,64 @@
 {% block content %}
 
     <div class="container">
-        <h2 class="mb-5">Список предметов</h2>
-        <div class="list-group w-75">
+        <h2 class="mb-5">Создание дисциплины</h2>
+        <form class="w-50" action="" method="post">
+            {% csrf_token %}
+            <div class="row mb-4">
+                <div class="col">
+                    <label for="subjectName">Название</label>
+                    <input type="text" class="form-control" id="subjectName" name="name">
+                </div>
+                <div class="col">
+                    <label for="level4">Количество баллов на 4</label>
+                    <input type="number" class="form-control" id="level4" name="level_4">
+                </div>
+            </div>
+            <div class="row mb-4">
+                <div class="col">
+                    <label for="level3">Количество баллов на 3</label>
+                    <input type="number" class="form-control" id="level3" name="level_3">
+                </div>
+                <div class="col">
+                    <label for="level5">Количество баллов на 5</label>
+                    <input type="number" class="form-control" id="level5" name="level_5">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Сохранить</button>
+        </form>
+    </div>
+
+    <div class="container mt-5">
+        <h2 class="mb-5">Список дисциплин</h2>
+        <table class="table w-75">
+            <thead>
+            <tr>
+                <th scope="col">Название</th>
+                <th scope="col">Количество баллов на 3</th>
+                <th scope="col">Количество баллов на 4</th>
+                <th scope="col">Количество баллов на 5</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
             {% for subject in object_list %}
-                <a href="/subjects/{{ subject.id }}"
-                   class="list-group-item list-group-item-action">{{ subject.name }}</a>
+                <tr>
+                    <th scope="row"><a href="/subjects/">{{ subject.name }}</a></th>
+                    <td>{{ subject.level_3 }}</td>
+                    <td>{{ subject.level_4 }}</td>
+                    <td>{{ subject.level_5 }}</td>
+                    <td class="d-flex justify-content-end">
+                        <form action="/subjects/{{ subject.id }}" method="post">
+                            {% csrf_token %}
+                            {#                  <button type="submit" class="btn btn-warning" name="put" value="{{ item.id }}">Изменить</button>#}
+                            <button type="submit" class="btn btn-danger" name="delete" value="{{ subject.id }}">Удалить
+                            </button>
+                        </form>
+                    </td>
+                </tr>
             {% endfor %}
-        </div>
+            </tbody>
+        </table>
     </div>
 
 {% endblock %}

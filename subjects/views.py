@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from subjects.models import Subject
+from subjects.models import Subject, Task, Lesson
 
 
 def subjects(request):
@@ -25,4 +25,28 @@ def subject(request, pk):
         return render(request, 'subjects/index.html', locals())
 
     subject = Subject.objects.get(id=pk)
+    return render(request, 'subjects/info.html', locals())
+
+
+def subject_tasks(request, pk):
+    if request.POST:
+        item = Task(
+            name=request.POST['name'],
+            deadline=request.POST['deadline'],
+            subject_id=pk,
+        )
+        item.save()
+    group = Subject.objects.get(id=pk)
+    return render(request, 'subjects/info.html', locals())
+
+
+def subject_lessons(request, pk):
+    if request.POST:
+        item = Lesson(
+            name=request.POST['name'],
+            date=request.POST['date'],
+            subject_id=pk,
+        )
+        item.save()
+    group = Subject.objects.get(id=pk)
     return render(request, 'subjects/info.html', locals())
