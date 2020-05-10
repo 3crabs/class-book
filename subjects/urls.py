@@ -1,8 +1,8 @@
 from django.conf.urls import url
-from django.views.generic import ListView
 
-from .models import Subject
+from . import views
 
 urlpatterns = [
-    url(r'^$', ListView.as_view(queryset=Subject.objects.all().order_by("name"), template_name="subjects/index.html")),
+    url(r'^$', views.subjects, name='subjects'),
+    url(r'^(?P<pk>\d+)$', views.subject, name='subject'),
 ]

@@ -4,11 +4,12 @@
 
     <div class="container">
         <h2 class="mb-5">Список предметов</h2>
-        <ul class="list-group w-75">
+        <div class="list-group w-75">
             {% for subject in object_list %}
-                <li class="list-group-item">{{ subject.name }}</li>
+                <a href="/subjects/{{ subject.id }}"
+                   class="list-group-item list-group-item-action">{{ subject.name }}</a>
             {% endfor %}
-        </ul>
+        </div>
     </div>
 
 {% endblock %}

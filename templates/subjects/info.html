@@ -1,0 +1,69 @@
+{% extends "main/wrapper.html" %}
+
+{% block content %}
+
+    <div class="container">
+        <h1 class="mb-5">Предмет {{ subject.name }}</h1>
+        <form class="w-25" action="/saveLevels/${subjectId}" method="post">
+            <div class="form-group">
+                <label for="level3">Количество баллов на 3</label>
+                <input type="text" class="form-control" id="level3" value="{{ subject.level_3 }}">
+            </div>
+            <div class="form-group">
+                <label for="level4">Количество баллов на 4</label>
+                <input type="text" class="form-control" id="level4" value="{{ subject.level_4 }}">
+            </div>
+            <div class="form-group">
+                <label for="level5">Количество баллов на 5</label>
+                <input type="text" class="form-control" id="level5" value="{{ subject.level_5 }}">
+            </div>
+            <button type="submit" class="btn btn-primary">Сохранить</button>
+        </form>
+    </div>
+
+    <div class="container mt-5">
+        <h1 class="mb-5">Таблица работ <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal">+</button></h1>
+
+        {% if subject.task_set.all %}
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Название</th>
+                    <th scope="col">Дата сдачи</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    {% for task in subject.task_set.all %}
+                        <td>{{ task.name }}</td>
+                        <td>{{ task.deadline | date }}</td>
+                    {% endfor %}
+                </tr>
+                </tbody>
+            </table>
+        {% else %}
+            <p>Лабораторных пока нет</p>
+        {% endif %}
+    </div>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            ...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+{% endblock %}

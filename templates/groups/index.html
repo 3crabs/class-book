@@ -3,12 +3,41 @@
 {% block content %}
 
     <div class="container">
-        <h2 class="mb-5">Список групп</h2>
-        <ul class="list-group w-75">
+        <h2 class="mb-5">Создание группы {{ subject.name }}</h2>
+        <form class="w-25" action="/groups/" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="level3">Название</label>
+                <input type="text" class="form-control" id="level3" name="name">
+            </div>
+            <button type="submit" class="btn btn-primary">Сохранить</button>
+        </form>
+    </div>
+
+    <div class="container mt-5">
+        <h2 class="mb-5">Список групп </h2>
+        <table class="table w-50">
+            <thead>
+            <tr>
+                <th scope="col">Название</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
             {% for group in object_list %}
-                <li class="list-group-item"><a href="/groups/{{ group.id }}">{{ group.name }}</a></li>
+                <tr>
+                    <th scope="row"><a href="/groups/{{ group.id }}">{{ group.name }}</a></th>
+                    <td class="d-flex justify-content-end">
+{#                        <button type="submit" class="btn btn btn-warning" name="put" value="{{ item.id }}">Изменить</button>#}
+                        <form action="/groups/{{ group.id }}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger" name="delete" value="{{ item.id }}">Удалить</button>
+                        </form>
+                    </td>
+                </tr>
             {% endfor %}
-        </ul>
+            </tbody>
+        </table>
     </div>
 
 {% endblock %}
