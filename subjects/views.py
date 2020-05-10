@@ -32,11 +32,11 @@ def subject_tasks(request, pk):
     if request.POST:
         item = Task(
             name=request.POST['name'],
-            deadline=request.POST['deadline'],
+            deadline=request.POST['date'],
             subject_id=pk,
         )
         item.save()
-    group = Subject.objects.get(id=pk)
+    subject = Subject.objects.get(id=pk)
     return render(request, 'subjects/info.html', locals())
 
 
@@ -48,5 +48,25 @@ def subject_lessons(request, pk):
             subject_id=pk,
         )
         item.save()
-    group = Subject.objects.get(id=pk)
+    subject = Subject.objects.get(id=pk)
+    return render(request, 'subjects/info.html', locals())
+
+
+def subject_task(request, pk, id):
+    task = Task.objects.get(id=id)
+
+    if 'delete' in request.POST:
+        task.delete()
+
+    subject = Subject.objects.get(id=pk)
+    return render(request, 'subjects/info.html', locals())
+
+
+def subject_lesson(request, pk, id):
+    lesson = Lesson.objects.get(id=id)
+
+    if 'delete' in request.POST:
+        lesson.delete()
+
+    subject = Subject.objects.get(id=pk)
     return render(request, 'subjects/info.html', locals())

@@ -3,38 +3,100 @@
 {% block content %}
 
     <div class="container">
-        <h2 class="mb-5">Группа {{ group.name }}</h2>
+        <h1 class="mb-5">Группа {{ group.name }}</h1>
         <div class="row">
             <div class="col-sm">
-                <h3 class="mb-5">Студенты
-                    <button type="button" class="btn btn-light">+</button>
-                </h3>
-                <p>Список студентов группы</p>
-                {% if group.student_set.all %}
-                    <ul class="list-group">
+                <h3 class="mb-5">Студенты</h3>
+                <div class="container">
+                    <form action="/groups/{{ group.id }}/students" method="post">
+                        {% csrf_token %}
+                        <div class="row mb-4">
+                            <div class="col">
+                                <label for="studentName">Имя</label>
+                                <input type="text" class="form-control" id="studentName" name="name">
+                            </div>
+                            <div class="col">
+                                <label for="email">email</label>
+                                <input type="email" class="form-control" id="email" name="email">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Сохранить</button>
+                    </form>
+                </div>
+
+                <div class="container mt-5">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Имя</th>
+                            <th scope="col">email</th>
+                            <th scope="col"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
                         {% for student in group.student_set.all %}
-                            <li class="list-group-item">{{ student.name }} {{ student.email }}</li>
+                            <tr>
+                                <th scope="row">{{ student.name }}</th>
+                                <td>{{ student.email }}</td>
+                                <td class="d-flex justify-content-end">
+                                    <form action="/groups/{{ group.id }}/students/{{ student.id }}" method="post">
+                                        {% csrf_token %}
+                                        {#                                        <button type="submit" class="btn btn-warning" name="put" value="{{ item.id }}">#}
+                                        {#                                            &#9998;#}
+                                        {#                                        </button>#}
+                                        <button type="submit" class="btn btn-danger" name="delete">&#128465;</button>
+                                    </form>
+                                </td>
+                            </tr>
                         {% endfor %}
-                    </ul>
-                {% else %}
-                    <p>Студентов пока нет</p>
-                {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+
             </div>
             <div class="col-sm">
-                <h3 class="mb-5">Предметы
-                    <button type="button" class="btn btn-light">+</button>
-                </h3>
-                <p>Нажмите на предмет чтобы открыть журнал</p>
-                {% if group.subjects.all %}
-                    <div class="list-group">
+                <h3 class="mb-5">Предметы</h3>
+                <div class="container">
+                    <form action="/groups/{{ group.id }}/subjects" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="subject">Добавляемая дисциплина</label>
+                            <select class="custom-select" id="subject" name="subject">
+                                {% for subject in subject_list %}
+                                    <option value="{{ subject.id }}">{{ subject.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Сохранить</button>
+                    </form>
+                </div>
+
+                <div class="container mt-5">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Название</th>
+                            <th scope="col"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
                         {% for subject in group.subjects.all %}
-                            <a href="/accouting/{{ subject.id }}"
-                               class="list-group-item list-group-item-action">{{ subject.name }}</a>
+                            <tr>
+                                <th scope="row"><a href="/groups/{{ group.id }}/subjects/{{ subject.id }}">{{ subject.name }}</a></th>
+                                <td class="d-flex justify-content-end">
+                                    <form action="/groups/{{ group.id }}/subjects/{{ subject.id }}" method="post">
+                                        {% csrf_token %}
+                                        {#                                    <button type="submit" class="btn btn-warning" name="put" value="{{ item.id }}">#}
+                                        {#                                        &#9998;#}
+                                        {#                                    </button>#}
+                                        <button type="submit" class="btn btn-danger" name="delete">&#128465;</button>
+                                    </form>
+                                </td>
+                            </tr>
                         {% endfor %}
-                    </div>
-                {% else %}
-                    <p>Предметов пока нет</p>
-                {% endif %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

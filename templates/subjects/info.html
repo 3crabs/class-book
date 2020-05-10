@@ -2,68 +2,143 @@
 
 {% block content %}
 
-    <div class="container">
-        <h1 class="mb-5">Предмет {{ subject.name }}</h1>
-        <form class="w-25" action="/saveLevels/${subjectId}" method="post">
-            <div class="form-group">
-                <label for="level3">Количество баллов на 3</label>
-                <input type="text" class="form-control" id="level3" value="{{ subject.level_3 }}">
-            </div>
-            <div class="form-group">
-                <label for="level4">Количество баллов на 4</label>
-                <input type="text" class="form-control" id="level4" value="{{ subject.level_4 }}">
-            </div>
-            <div class="form-group">
-                <label for="level5">Количество баллов на 5</label>
-                <input type="text" class="form-control" id="level5" value="{{ subject.level_5 }}">
-            </div>
-            <button type="submit" class="btn btn-primary">Сохранить</button>
-        </form>
+    {#    <div class="container">#}
+    {#        <h1 class="mb-5">Предмет {{ subject.name }}</h1>#}
+    {#        <form class="w-25" action="/saveLevels/${subjectId}" method="post">#}
+    {#            <div class="form-group">#}
+    {#                <label for="level3">Количество баллов на 3</label>#}
+    {#                <input type="text" class="form-control" id="level3" value="{{ subject.level_3 }}">#}
+    {#            </div>#}
+    {#            <div class="form-group">#}
+    {#                <label for="level4">Количество баллов на 4</label>#}
+    {#                <input type="text" class="form-control" id="level4" value="{{ subject.level_4 }}">#}
+    {#            </div>#}
+    {#            <div class="form-group">#}
+    {#                <label for="level5">Количество баллов на 5</label>#}
+    {#                <input type="text" class="form-control" id="level5" value="{{ subject.level_5 }}">#}
+    {#            </div>#}
+    {#            <button type="submit" class="btn btn-primary">Сохранить</button>#}
+    {#        </form>#}
+    {#    </div>#}
+
+    <div class="container mt-5">
+        <h1 class="mb-5">Таблица работ
+            <button type="button" class="btn btn-light" data-toggle="modal" data-target="#addModal"
+                    data-whatever="task">+
+            </button>
+        </h1>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Название</th>
+                <th scope="col">Дата сдачи</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for task in subject.task_set.all %}
+                <tr>
+                    <td>{{ task.name }}</td>
+                    <td>{{ task.deadline | date }}</td>
+                    <td class="d-flex justify-content-end">
+                        <form action="/subjects/{{ subject.id }}/tasks/{{ task.id }}" method="post">
+                            {% csrf_token %}
+                            {#                  <button type="submit" class="btn btn-warning" name="put" value="{{ item.id }}">&#9998;</button>#}
+                            <button type="submit" class="btn btn-danger" name="delete" value="{{ item.id }}">&#128465;
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
     </div>
 
     <div class="container mt-5">
-        <h1 class="mb-5">Таблица работ <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal">+</button></h1>
-
-        {% if subject.task_set.all %}
-            <table class="table">
-                <thead>
-                <tr>
-                    <th scope="col">Название</th>
-                    <th scope="col">Дата сдачи</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    {% for task in subject.task_set.all %}
-                        <td>{{ task.name }}</td>
-                        <td>{{ task.deadline | date }}</td>
-                    {% endfor %}
-                </tr>
-                </tbody>
-            </table>
-        {% else %}
-            <p>Лабораторных пока нет</p>
-        {% endif %}
-    </div>
-
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
+        <h1 class="mb-5">Таблица пар
+            <button type="button" class="btn btn-light" data-toggle="modal" data-target="#addModal"
+                    data-whatever="lesson">+
             </button>
-          </div>
-          <div class="modal-body">
-            ...
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
-        </div>
-      </div>
+        </h1>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Название</th>
+                <th scope="col">Дата</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for lesson in subject.lesson_set.all %}
+                <tr>
+                    <td>{{ lesson.name }}</td>
+                    <td>{{ lesson.date | date }}</td>
+                    <td class="d-flex justify-content-end">
+                        <form action="/subjects/{{ subject.id }}/lessons/{{ lesson.id }}" method="post">
+                            {% csrf_token %}
+                            {#                  <button type="submit" class="btn btn-warning" name="put" value="{{ item.id }}">&#9998;</button>#}
+                            <button type="submit" class="btn btn-danger" name="delete" value="{{ item.id }}">&#128465;
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
     </div>
+
+    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addModalLabel">Добавление задания</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="createForm" action="" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="taskName">Название</label>
+                            <input type="text" class="form-control" id="taskName" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="deadline">Дата</label>
+                            <input type="date" class="form-control" id="deadline" name="date" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                    <button type="submit" form="createForm" class="btn btn-primary">Сохранить
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        $('#addModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var source = button.data('whatever');
+            var modal = $(this);
+            var action = source === "task" ? "/subjects/{{ subject.id }}/tasks" : "/subjects/{{ subject.id }}/lessons";
+            var sourceName = source === "task" ? 'задания' : 'пары';
+            modal.find('.modal-title').text('Добавление ' + sourceName);
+            var form = modal.find('#createForm')[0];
+            form.action = action;
+        })
+    </script>
 
 {% endblock %}

@@ -45,7 +45,7 @@
             <tbody>
             {% for subject in object_list %}
                 <tr>
-                    <th scope="row"><a href="/subjects/">{{ subject.name }}</a></th>
+                    <th scope="row"><a href="/subjects/{{ subject.id }}">{{ subject.name }}</a></th>
                     <td>{{ subject.level_3 }}</td>
                     <td>{{ subject.level_4 }}</td>
                     <td>{{ subject.level_5 }}</td>
