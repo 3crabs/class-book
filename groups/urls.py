@@ -9,4 +9,5 @@ urlpatterns = [
     url(r'^(?P<pk>\d+)/subjects$', views.group_subjects, name='group_subjects'),
     url(r'^(?P<pk>\d+)/students/(?P<id>\d+)$', views.group_student, name='group_student'),
     url(r'^(?P<pk>\d+)/subjects/(?P<id>\d+)$', views.group_subject, name='group_subject'),
+    url(r'^(?P<pk>\d+)/subjects/(?P<id>\d+)/download$', views.create_xls, name='create_xls'),
 ]

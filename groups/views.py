@@ -1,8 +1,11 @@
+from django.http import HttpResponse
 from django.shortcuts import render
 
 from accounting.models import Attendance, Result
 from groups.models import Group, Student
 from subjects.models import Subject
+
+import xlwt
 
 
 def groups(request):
@@ -96,4 +99,63 @@ def group_subject(request, pk, id):
         return render(request, 'groups/info.html', locals())
     else:
         group = Group.objects.get(id=pk)
+        itogs = {}
+        for student in group.student_set.all():
+            itogs[student.id] = student.id + 1
+        print(itogs)
         return render(request, 'accouting/index.html', locals())
+
+
+def create_xls_(group, subject):
+    book = xlwt.Workbook(encoding="utf-8")
+    sheet = book.add_sheet(group.name)
+    sheet.write(0, 0, "Успеваемость группы " + group.name + " по предмету " + subject.name)
+    row = 1
+    col = 0
+    sheet.write(row, col, "Посещаемость")
+    row += 1
+    sheet.write(row, col, "Студент")
+    col += 1
+    for lesson in subject.lesson_set.all():
+        sheet.write(row, col, lesson.name)
+        col += 1
+    row += 1
+    col = 0
+    for student in group.student_set.all():
+        sheet.write(row, col, student.name)
+        col += 1
+        for attendance in student.attendance_set.filter(lesson__subject_id=subject.id):
+            sheet.write(row, col, attendance.visit)
+            col += 1
+        row += 1
+        col = 0
+
+    sheet.write(row, col, "Результаты")
+    row += 1
+    sheet.write(row, col, "Студент")
+    col += 1
+    for task in subject.task_set.all():
+        sheet.write(row, col, task.name)
+        col += 1
+    row += 1
+    col = 0
+    for student in group.student_set.all():
+        sheet.write(row, col, student.name)
+        col += 1
+        for result in student.result_set.filter(task__subject_id=subject.id):
+            sheet.write(row, col, result.rating)
+            col += 1
+        row += 1
+        col = 0
+
+    book.save("groups/static/docs/spreadsheet.xlsx")
+
+
+def create_xls(request, pk, id):
+    group = Group.objects.get(id=pk)
+    subject = group.subjects.get(id=id)
+    create_xls_(group, subject)
+    file = open('groups/static/docs/spreadsheet.xlsx', 'rb')
+    response = HttpResponse(file, content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    response['Content-Disposition'] = 'attachment; filename=table.xlsx'
+    return response

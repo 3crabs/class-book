@@ -28,7 +28,6 @@
                 <tr>
                     <th scope="row"><a href="/groups/{{ group.id }}">{{ group.name }}</a></th>
                     <td class="d-flex justify-content-end">
-{#                        <button type="submit" class="btn btn btn-warning" name="put" value="{{ item.id }}">Изменить</button>#}
                         <form action="/groups/{{ group.id }}" method="post">
                             {% csrf_token %}
                             <button type="submit" class="btn btn-danger" name="delete" value="{{ item.id }}">Удалить</button>
