@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
 from accounting.models import Attendance, Result
+from class_book import settings
 from groups.models import Group, Student
 from subjects.models import Subject
 
@@ -149,8 +150,9 @@ def create_xls_(group, subject):
         row += 1
         col = 0
 
-    book.save("groups/static/docs/spreadsheet-" + group.id + "-" + subject.id + ".xlsx")
-    return "groups/static/docs/spreadsheet-" + group.id + "-" + subject.id + ".xlsx"
+    path = "groups/static/docs/spreadsheet-" + str(group.id) + "-" + str(subject.id) + ".xlsx"
+    book.save(path)
+    return path
 
 
 def create_xls(request, pk, id):
@@ -170,7 +172,7 @@ def sending(request, pk, id):
     email = EmailMessage(
         'Результаты',
         'Здравствуй, вот ваша успеваемость',
-        'pravdin97@3crabs.ru',
+        settings.EMAIL_HOST_USER,
         emails
     )
     path = create_xls_(group, Subject.objects.get(id=id))
