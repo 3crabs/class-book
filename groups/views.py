@@ -60,9 +60,9 @@ def group_subjects(request, pk):
 
 
 def group_subject(request, pk, id):
+    subject = Subject.objects.get(id=id)
     if 'delete' in request.POST:
         group = Group.objects.get(id=pk)
-        subject = Subject.objects.get(id=id)
         group.subjects.remove(subject)
         group.save()
         group = Group.objects.get(id=pk)

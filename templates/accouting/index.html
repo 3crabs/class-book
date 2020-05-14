@@ -3,94 +3,37 @@
 {% block content %}
 
     <div class="container">
-        <h2 class="mb-5">Журнал группы ${groupName}</h2>
+        <h2 class="mb-5">Журнал группы {{ group.name }}</h2>
+        <h3 class="mb-5">Предмет {{ subject.name }}</h3>
         <div class="container">
             <h2 class="mb-5">Посещаемость</h2>
             <table class="table">
                 <thead>
                 <tr>
                     <th scope="col">Студент</th>
-                    <th scope="col">Лаба 1</th>
-                    <th scope="col">Лаба 2</th>
-                    <th scope="col">Лаба 3</th>
+                    {% for lesson in subject.lesson_set.all %}
+                        <th scope="col">{{ lesson.name }}</th>
+                    {% endfor %}
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th scope="row">Иванов</th>
-                    <td>
-                        <form class="form-inline" action="/addMark" method="post">
-                            <div class="form-group">
-                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                <div class="form-group">
-                        </form>
-                    </td>
-                    <td>
-                        <form class="form-inline" action="/addMark" method="post">
-                            <div class="form-group">
-                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                <div class="form-group">
-                        </form>
-                    </td>
-                    <td>
-                        <form class="form-inline" action="/addMark" method="post">
-                            <div class="form-group">
-                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                <div class="form-group">
-                        </form>
-                    </td>
-                </tr>
-
-                <tr>
-                    <th scope="row">Иванов</th>
-                    <td>
-                        <form class="form-inline" action="/addMark" method="post">
-                            <div class="form-group">
-                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                <div class="form-group">
-                        </form>
-                    </td>
-                    <td>
-                        <form class="form-inline" action="/addMark" method="post">
-                            <div class="form-group">
-                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                <div class="form-group">
-                        </form>
-                    </td>
-                    <td>
-                        <form class="form-inline" action="/addMark" method="post">
-                            <div class="form-group">
-                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                <div class="form-group">
-                        </form>
-                    </td>
-                </tr>
-
-                <tr>
-                    <th scope="row">Иванов</th>
-                    <td>
-                        <form class="form-inline" action="/addMark" method="post">
-                            <div class="form-group">
-                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                <div class="form-group">
-                        </form>
-                    </td>
-                    <td>
-                        <form class="form-inline" action="/addMark" method="post">
-                            <div class="form-group">
-                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                <div class="form-group">
-                        </form>
-                    </td>
-                    <td>
-                        <form class="form-inline" action="/addMark" method="post">
-                            <div class="form-group">
-                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                <div class="form-group">
-                        </form>
-                    </td>
-                </tr>
-
+                {% for student in group.student_set.all %}
+                    <tr>
+                        <th scope="row">{{ student.name }}</th>
+                        {% for attendance in student.attendance_set.all %}
+                            <td>
+                                <form class="form-inline" action="/attendances/{{ attendance.id }}" method="post">
+                                    <div class="form-group">
+                                        <label for="defaultCheck1"></label><input class="form-check-input"
+                                                                                  type="checkbox"
+                                                                                  value="{{ attendance.visit }}"
+                                                                                  id="defaultCheck1">
+                                    </div>
+                                </form>
+                            </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
                 </tbody>
             </table>
         </div>
@@ -101,54 +44,25 @@
                 <thead>
                 <tr>
                     <th scope="col">Студент</th>
-                    <th scope="col">Лаба 1</th>
-                    <th scope="col">Лаба 2</th>
-                    <th scope="col">Лаба 3</th>
-                    <th scope="col">Лаба 4</th>
+                    {% for task in subject.task_set.all %}
+                        <th scope="col">{{ task.name }}</th>
+                    {% endfor %}
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th scope="row">Иванов</th>
-                    <td>
-                        <input class="form-control" type="text" placeholder="${ivanov lab1 rating}" readonly
-                               data-toggle="modal" data-target="#exampleModal" data-whatever="Иванов" y>
-                    </td>
-                    <td>
-                        <input class="form-control" type="text" placeholder="${ivanov lab1 rating}" readonly
-                               data-toggle="modal" data-target="#exampleModal" data-whatever="Иванов" y>
-                    </td>
-                    <td>
-                        <input class="form-control" type="text" placeholder="${ivanov lab1 rating}" readonly
-                               data-toggle="modal" data-target="#exampleModal" data-whatever="Иванов" y>
-                    </td>
-                    <td>
-                        <input class="form-control" type="text" placeholder="${ivanov lab1 rating}" readonly
-                               data-toggle="modal" data-target="#exampleModal" data-whatever="Иванов" y>
-                    </td>
-                </tr>
-
-                <tr>
-                    <th scope="row">Петров</th>
-                    <td>
-                        <input class="form-control" type="text" placeholder="${ivanov lab1 rating}" readonly
-                               data-toggle="modal" data-target="#exampleModal" data-whatever="Иванов" y>
-                    </td>
-                    <td>
-                        <input class="form-control" type="text" placeholder="${ivanov lab1 rating}" readonly
-                               data-toggle="modal" data-target="#exampleModal" data-whatever="Иванов" y>
-                    </td>
-                    <td>
-                        <input class="form-control" type="text" placeholder="${ivanov lab1 rating}" readonly
-                               data-toggle="modal" data-target="#exampleModal" data-whatever="Иванов" y>
-                    </td>
-                    <td>
-                        <input class="form-control" type="text" placeholder="${ivanov lab1 rating}" readonly
-                               data-toggle="modal" data-target="#exampleModal" data-whatever="Иванов" y>
-                    </td>
-                </tr>
-
-
+                {% for student in group.student_set.all %}
+                    <tr>
+                        <th scope="row">{{ student.name }}</th>
+                        {% for result in student.result_set.all %}
+                            <td>
+                                <label>
+                                    <input class="form-control" type="text" placeholder="${ivanov lab1 rating}" readonly
+                                           data-toggle="modal" data-target="#exampleModal" data-whatever="Иванов" value="{{ result.rating }}">
+                                </label>
+                            </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
                 </tbody>
             </table>
 
