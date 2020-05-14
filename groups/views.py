@@ -1,4 +1,5 @@
-from django.http import HttpResponse
+from django.core.mail import EmailMessage
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
 from accounting.models import Attendance, Result
@@ -148,14 +149,31 @@ def create_xls_(group, subject):
         row += 1
         col = 0
 
-    book.save("groups/static/docs/spreadsheet.xlsx")
+    book.save("groups/static/docs/spreadsheet-" + group.id + "-" + subject.id + ".xlsx")
+    return "groups/static/docs/spreadsheet-" + group.id + "-" + subject.id + ".xlsx"
 
 
 def create_xls(request, pk, id):
     group = Group.objects.get(id=pk)
     subject = group.subjects.get(id=id)
-    create_xls_(group, subject)
-    file = open('groups/static/docs/spreadsheet.xlsx', 'rb')
+    path = create_xls_(group, subject)
+    file = open(path, 'rb')
     response = HttpResponse(file, content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
     response['Content-Disposition'] = 'attachment; filename=table.xlsx'
     return response
+
+
+def sending(request, pk, id):
+    group = Group.objects.get(id=pk)
+    students = group.student_set.all()
+    emails = [student.email for student in students]
+    email = EmailMessage(
+        'Результаты',
+        'Здравствуй, вот ваша успеваемость',
+        'pravdin97@3crabs.ru',
+        emails
+    )
+    path = create_xls_(group, Subject.objects.get(id=id))
+    email.attach_file(path)
+    email.send()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
