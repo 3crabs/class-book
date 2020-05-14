@@ -1,5 +1,7 @@
 from django.shortcuts import render
 
+from accounting.models import Attendance, Result
+from groups.models import Group
 from subjects.models import Subject, Task, Lesson
 
 
@@ -36,6 +38,14 @@ def subject_tasks(request, pk):
             subject_id=pk,
         )
         item.save()
+        groups = Group.objects.all()
+        for group in groups:
+            if item.subject in group.subjects.all():
+                for student in group.student_set.all():
+                    result = Result()
+                    result.student = student
+                    result.task = item
+                    result.save()
     subject = Subject.objects.get(id=pk)
     return render(request, 'subjects/info.html', locals())
 
@@ -48,6 +58,14 @@ def subject_lessons(request, pk):
             subject_id=pk,
         )
         item.save()
+        groups = Group.objects.all()
+        for group in groups:
+            if item.subject in group.subjects.all():
+                for student in group.student_set.all():
+                    attendance = Attendance()
+                    attendance.student = student
+                    attendance.lesson = item
+                    attendance.save()
     subject = Subject.objects.get(id=pk)
     return render(request, 'subjects/info.html', locals())
 

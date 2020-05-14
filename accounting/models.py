@@ -13,7 +13,7 @@ class Attendance(models.Model):
 
 
 class Result(models.Model):
-    rating = models.FloatField()
+    rating = models.FloatField(default=0)
     task = models.ForeignKey(Task, on_delete=models.CASCADE)
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
     date = models.DateField(default=date.today)

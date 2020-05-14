@@ -1,5 +1,6 @@
 from django.shortcuts import render
 
+from accounting.models import Attendance, Result
 from groups.models import Group, Student
 from subjects.models import Subject
 
@@ -33,6 +34,19 @@ def group_students(request, pk):
             group_id=pk,
         )
         item.save()
+        group = Group.objects.get(id=pk)
+        subjects = group.subjects.all()
+        for subject in subjects:
+            for lesson in subject.lesson_set.all():
+                attendance = Attendance()
+                attendance.student = item
+                attendance.lesson = lesson
+                attendance.save()
+            for task in subject.task_set.all():
+                result = Result()
+                result.student = item
+                result.task = task
+                result.save()
     group = Group.objects.get(id=pk)
     return render(request, 'groups/info.html', locals())
 
@@ -54,6 +68,18 @@ def group_subjects(request, pk):
         subject = Subject.objects.get(id=request.POST['subject'])
         group.subjects.add(subject)
         group.save()
+        group = Group.objects.get(id=pk)
+        for student in group.student_set.all():
+            for lesson in subject.lesson_set.all():
+                attendance = Attendance()
+                attendance.student = student
+                attendance.lesson = lesson
+                attendance.save()
+            for task in subject.task_set.all():
+                result = Result()
+                result.student = student
+                result.task = task
+                result.save()
     group = Group.objects.get(id=pk)
     subject_list = Subject.objects.all().order_by("name")
     return render(request, 'groups/info.html', locals())
@@ -71,7 +97,3 @@ def group_subject(request, pk, id):
     else:
         group = Group.objects.get(id=pk)
         return render(request, 'accouting/index.html', locals())
-
-
-
-

@@ -21,16 +21,17 @@
                     <tr>
                         <th scope="row">{{ student.name }}</th>
                         {% for attendance in student.attendance_set.all %}
-                            <td>
-                                <form class="form-inline" action="/attendances/{{ attendance.id }}" method="post">
+                            {% if attendance.lesson.subject.id is subject.id %}
+                                <td>
                                     <div class="form-group">
                                         <label for="defaultCheck1"></label><input class="form-check-input"
                                                                                   type="checkbox"
                                                                                   value="{{ attendance.visit }}"
                                                                                   id="defaultCheck1">
                                     </div>
-                                </form>
-                            </td>
+
+                                </td>
+                            {% endif %}
                         {% endfor %}
                     </tr>
                 {% endfor %}
@@ -54,12 +55,16 @@
                     <tr>
                         <th scope="row">{{ student.name }}</th>
                         {% for result in student.result_set.all %}
-                            <td>
-                                <label>
-                                    <input class="form-control" type="text" placeholder="${ivanov lab1 rating}" readonly
-                                           data-toggle="modal" data-target="#exampleModal" data-whatever="Иванов" value="{{ result.rating }}">
-                                </label>
-                            </td>
+                            {% if result.task.subject.id is subject.id %}
+                                <td>
+                                    <label>
+                                        <input class="form-control" type="text" placeholder="{{ result.rating }}"
+                                               readonly
+                                               data-toggle="modal" data-target="#exampleModal" data-whatever="Иванов"
+                                               value="{{ result.rating }}">
+                                    </label>
+                                </td>
+                            {% endif %}
                         {% endfor %}
                     </tr>
                 {% endfor %}
