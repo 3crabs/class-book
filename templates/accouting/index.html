@@ -18,6 +18,7 @@
                     {% for lesson in subject.lesson_set.all %}
                         <th scope="col">{{ lesson.name }}</th>
                     {% endfor %}
+                    <th scope="col">Посещаемость</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -42,6 +43,8 @@
                                 </td>
                             {% endif %}
                         {% endfor %}
+                        {% load my_tags %}
+                        <td>{{ student| lessons:subject }}</td>
                     </tr>
                 {% endfor %}
                 </tbody>
@@ -57,6 +60,7 @@
                     {% for task in subject.task_set.all %}
                         <th scope="col">{{ task.name }}</th>
                     {% endfor %}
+                    <th scope="col">Успеваемость</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -76,6 +80,7 @@
                                 </td>
                             {% endif %}
                         {% endfor %}
+                        <td>{{ student| tasks:subject }}</td>
                     </tr>
                 {% endfor %}
                 </tbody>

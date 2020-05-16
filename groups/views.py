@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
 from accounting.models import Attendance, Result
+from accounting.templatetags import my_tags
 from class_book import settings
 from groups.models import Group, Student
 from subjects.models import Subject
@@ -121,6 +122,7 @@ def create_xls_(group, subject):
     for lesson in subject.lesson_set.all():
         sheet.write(row, col, lesson.name)
         col += 1
+    sheet.write(row, col, "Посещаемость")
     row += 1
     col = 0
     for student in group.student_set.all():
@@ -129,6 +131,7 @@ def create_xls_(group, subject):
         for attendance in student.attendance_set.filter(lesson__subject_id=subject.id):
             sheet.write(row, col, attendance.visit)
             col += 1
+        sheet.write(row, col, my_tags.lessons(student, subject))
         row += 1
         col = 0
 
@@ -139,6 +142,7 @@ def create_xls_(group, subject):
     for task in subject.task_set.all():
         sheet.write(row, col, task.name)
         col += 1
+    sheet.write(row, col, "Успеваемость")
     row += 1
     col = 0
     for student in group.student_set.all():
@@ -147,6 +151,7 @@ def create_xls_(group, subject):
         for result in student.result_set.filter(task__subject_id=subject.id):
             sheet.write(row, col, result.rating)
             col += 1
+        sheet.write(row, col, my_tags.tasks(student, subject))
         row += 1
         col = 0
 
